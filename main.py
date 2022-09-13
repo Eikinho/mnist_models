@@ -1,15 +1,14 @@
-from src.data.Data import Data
-from src.models.Net import Net
 from src.models.ANN import ANN
 from src.models.CNN import CNN
+from src.models.CNN_Aug import CNN_Aug
+from src.models.LeNet import LeNet
 
 import cv2 as cv
 import numpy as np
-import matplotlib.pyplot as plt
 from pathlib import Path
 
 
-def main():
+def test_models():
     raiz_desafio = Path(
         "/content/drive/MyDrive/Insper/Visao/Visão-2022-Compartilhada com alunos/atividade_batalha_das_redes/digitos_para_teste"
     )
@@ -26,9 +25,30 @@ def main():
         dict_desafios[digito]["predito"] = 0
 
 
-if __name__ == "__main__":
-    ANN = ANN()
-    ANN.train(0.2, 8, 5)
+def train_models():
+    # ann = ANN()
+    # ann.train(0.2, 8, 5)
+    # ANN.evaluate()
+    # ANN.plot_confusion_matrix(ANN.y_test, ANN.predictions)
 
-    CNN = CNN()
-    CNN.train(0.2, 8, 5)
+    # cnn = CNN()
+    # cnn.train(0.2, 128, 25)
+    # CNN.evaluate()
+    # CNN.plot_confusion_matrix(CNN.y_test, CNN.predictions)
+
+    cnn_aug = CNN_Aug()
+    cnn_aug.augment_data()
+    cnn_aug.train(0.2, 128, 25, True)
+    # CNN_Aug.evaluate()
+    # CNN_Aug.plot_confusion_matrix(CNN_Aug.y_test, CNN_Aug.predictions)
+
+    lenet_aug = LeNet()
+    lenet_aug.augment_data()
+    # lenet_aug.train(0.2, 128, 25, True)
+    # LeNet_Aug.evaluate()
+    # LeNet_Aug.plot_confusion_matrix(LeNet_Aug.y_test, LeNet_Aug.predictions)
+
+
+if __name__ == "__main__":
+    train_models()
+    # test_models()
