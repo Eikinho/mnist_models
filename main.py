@@ -36,15 +36,15 @@ def train_models():
     # CNN.evaluate()
     # CNN.plot_confusion_matrix(CNN.y_test, CNN.predictions)
 
-    cnn_aug = CNN_Aug()
-    cnn_aug.augment_data()
-    cnn_aug.train(0.2, 128, 25, True)
+    # cnn_aug = CNN_Aug()
+    # cnn_aug.augment_data()
+    # cnn_aug.train(0.2, 128, 25, True)
     # CNN_Aug.evaluate()
     # CNN_Aug.plot_confusion_matrix(CNN_Aug.y_test, CNN_Aug.predictions)
 
     lenet_aug = LeNet()
     lenet_aug.augment_data()
-    # lenet_aug.train(0.2, 128, 25, True)
+    lenet_aug.train(0.2, 128, 25, True)
     # LeNet_Aug.evaluate()
     # LeNet_Aug.plot_confusion_matrix(LeNet_Aug.y_test, LeNet_Aug.predictions)
 

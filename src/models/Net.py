@@ -20,8 +20,8 @@ class Net(Data):
         )
         if not data_augmentation:
             self.history = self.model.fit(
-                self.x_train,
-                self.y_train,
+                x=self.x_train,
+                y=self.y_train,
                 validation_split=val_split,
                 validation_data=(self.x_test, self.y_test),
                 batch_size=batch_size,
@@ -29,13 +29,13 @@ class Net(Data):
                 callbacks=[callback_es],
             )
         else:
-            self.history = self.model.fit_generator(
-                self.train_generator,
-                steps_per_epoch=600,
+            self.history = self.model.fit(
+                x=self.train_generator,
+                validation_split=val_split,
+                validation_data=(self.x_test, self.y_test),
+                steps_per_epoch=len(self.x_test) // batch_size,
                 epochs=epochs,
-                validation_data=self.validation_generator,
-                validation_steps=150,
-                callbacks=[callback_es]
+                callbacks=[callback_es],
             )
 
         self.model.save(f"src/results/{self.name}.h5")
@@ -47,11 +47,9 @@ class Net(Data):
         return self.model.evaluate(self.x_test, self.y_test)
 
     def plot_confusion_matrix(self, labels, predictions):
-        confusion_mtx = confusion_matrix(
-            labels, np.argmax(predictions, axis=1))
+        confusion_mtx = confusion_matrix(labels, np.argmax(predictions, axis=1))
         _, ax = plt.subplots(figsize=(15, 10))
-        ax = sns.heatmap(confusion_mtx, annot=True,
-                         fmt="d", ax=ax, cmap="Blues")
+        ax = sns.heatmap(confusion_mtx, annot=True, fmt="d", ax=ax, cmap="Blues")
         ax.set_xlabel("Predicted Label")
         ax.set_ylabel("True Label")
         ax.set_title("Confusion Matrix")

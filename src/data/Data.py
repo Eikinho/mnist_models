@@ -9,27 +9,28 @@ class Data:
         (self.x_train, self.y_train), (self.x_test, self.y_test) = mnist.load_data()
         self.x_train = np.reshape(self.x_train, [-1, 28, 28, 1])
         self.x_test = np.reshape(self.x_test, [-1, 28, 28, 1])
+        print(f"size before augmentation: {self.x_train.shape}")
 
     def augment_data(self, BATCH_SIZE=128):
         train_datagen = ImageDataGenerator(
-            rescale=1.0 / 255,
-            rotation_range=40,
-            width_shift_range=0.2,
-            shear_range=0.2,
-            zoom_range=0.2,
-            horizontal_flip=False,
+            featurewise_center=True,
+            featurewise_std_normalization=True,
+            rotation_range=10,
+            fill_mode="nearest",
+            validation_split=0.15,
         )
 
         validation_datagen = ImageDataGenerator(rescale=1.0 / 255)
 
+        # Flow training images in batches of 128 using train_datagen generator
         self.train_generator = train_datagen.flow(
             self.x_train, self.y_train, batch_size=BATCH_SIZE
         )
 
-        self.validation_generator = validation_datagen.flow(
+        # Flow validation images in batches of 128 using test_datagen generator
+        validation_generator = validation_datagen.flow(
             self.x_test, self.y_test, batch_size=BATCH_SIZE
         )
-
 
     def plot_data(self, x_train, y_train):
         plt.figure(figsize=(10, 10))
