@@ -13,10 +13,10 @@ class Data:
 
     def augment_data(self, BATCH_SIZE=128):
         train_datagen = ImageDataGenerator(
-            rotation_range=10,
-            zoom_range=0.1,
-            width_shift_range=0.25,
-            height_shift_range=0.25,
+            rotation_range=5,
+            zoom_range=0.4,
+            width_shift_range=0.1,
+            height_shift_range=0.1,
             horizontal_flip=False,
             vertical_flip=False,
             fill_mode='constant',

@@ -94,3 +94,4 @@ class Net(Data):
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper right')
         plt.tight_layout()
+        plt.show()
