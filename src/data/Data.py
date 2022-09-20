@@ -19,14 +19,13 @@ class Data:
             height_shift_range=0.1,
             horizontal_flip=False,
             vertical_flip=False,
-            fill_mode='constant',
-            cval=0.0
+            fill_mode="constant",
+            cval=0.0,
         )
 
         self.train_generator = train_datagen.flow(
             self.x_train, self.y_train, batch_size=BATCH_SIZE
         )
-
 
     def plot_some_data(self, imgs):
         fig, axs = plt.subplots(1, 5, figsize=(15, 15))

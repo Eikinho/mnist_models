@@ -44,9 +44,7 @@ class Net(Data):
         self.model.save(f"src/results/{self.name}.h5")
 
     def load_test_data(self, data_path="src/data/digitos_para_teste"):
-        raiz_desafio = Path(
-            data_path
-        )
+        raiz_desafio = Path(data_path)
         self.dict_desafios = {}
         self.y_true = []
         self.test_imgs = []
@@ -59,39 +57,42 @@ class Net(Data):
             p = p.reshape(-1, 28, 28, 1)
             p = p / 255
             self.test_imgs.append(p)
-        
+
     def test(self):
         self.y_pred = []
         for img in self.test_imgs:
             self.y_pred.append(np.argmax(self.model.predict(img)))
-        
+
     def load_model(self):
         self.model = tf.keras.models.load_model(f"src/results/{self.name}.h5")
 
     def plot_confusion_matrix(self, labels, predictions):
         confusion_mtx = confusion_matrix(
-            labels, predictions, labels=np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), normalize="true"
+            labels,
+            predictions,
+            labels=np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+            normalize="true",
         )
-        df_cm = pd.DataFrame(confusion_mtx, index = range(0,10), columns = range(0,10))
-        plt.figure(figsize = (10,7))
+        df_cm = pd.DataFrame(confusion_mtx, index=range(0, 10), columns=range(0, 10))
+        plt.figure(figsize=(10, 7))
         sns.heatmap(df_cm, annot=True)
         plt.show()
 
     def plot_history(self):
         fig = plt.figure()
-        plt.subplot(2,1,1)
-        plt.plot(self.history.history['accuracy'])
-        plt.plot(self.history.history['val_accuracy'])
-        plt.title('model accuracy')
-        plt.ylabel('accuracy')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='lower right')
-        plt.subplot(2,1,2)
-        plt.plot(self.history.history['loss'])
-        plt.plot(self.history.history['val_loss'])
-        plt.title('model loss')
-        plt.ylabel('loss')
-        plt.xlabel('epoch')
-        plt.legend(['train', 'test'], loc='upper right')
+        plt.subplot(2, 1, 1)
+        plt.plot(self.history.history["accuracy"])
+        plt.plot(self.history.history["val_accuracy"])
+        plt.title("model accuracy")
+        plt.ylabel("accuracy")
+        plt.xlabel("epoch")
+        plt.legend(["train", "test"], loc="lower right")
+        plt.subplot(2, 1, 2)
+        plt.plot(self.history.history["loss"])
+        plt.plot(self.history.history["val_loss"])
+        plt.title("model loss")
+        plt.ylabel("loss")
+        plt.xlabel("epoch")
+        plt.legend(["train", "test"], loc="upper right")
         plt.tight_layout()
         plt.show()

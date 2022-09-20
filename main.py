@@ -2,11 +2,6 @@ from src.models.ANN import ANN
 from src.models.CNN import CNN
 from src.models.CNN_Aug import CNN_Aug
 from src.models.LeNet import LeNet
-from src.models.Net import Net
-
-import cv2 as cv
-import numpy as np
-from pathlib import Path
 
 
 def train_models(ann_=False, cnn_=False, cnn_aug_=False, lenet_aug_=False):
