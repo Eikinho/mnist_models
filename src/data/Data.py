@@ -13,30 +13,26 @@ class Data:
 
     def augment_data(self, BATCH_SIZE=128):
         train_datagen = ImageDataGenerator(
-            featurewise_center=True,
-            featurewise_std_normalization=True,
             rotation_range=10,
-            fill_mode="nearest",
-            validation_split=0.15,
+            zoom_range=0.1,
+            width_shift_range=0.25,
+            height_shift_range=0.25,
+            horizontal_flip=False,
+            vertical_flip=False,
+            fill_mode='constant',
+            cval=0.0
         )
 
-        validation_datagen = ImageDataGenerator(rescale=1.0 / 255)
-
-        # Flow training images in batches of 128 using train_datagen generator
         self.train_generator = train_datagen.flow(
             self.x_train, self.y_train, batch_size=BATCH_SIZE
         )
 
-        # Flow validation images in batches of 128 using test_datagen generator
-        validation_generator = validation_datagen.flow(
-            self.x_test, self.y_test, batch_size=BATCH_SIZE
-        )
 
-    def plot_data(self, x_train, y_train):
-        plt.figure(figsize=(10, 10))
-        for i in range(25):
-            plt.subplot(5, 5, i + 1)
-            plt.grid(False)
-            plt.imshow(x_train[i], cmap=plt.cm.binary)
-            plt.xlabel(y_train[i])
+    def plot_some_data(self, imgs):
+        fig, axs = plt.subplots(1, 5, figsize=(15, 15))
+        axs = axs.flatten()
+        for img, ax in zip(imgs, axs):
+            ax.imshow(img.reshape(28, 28), cmap="gray")
+            ax.axis("off")
+        plt.tight_layout()
         plt.show()
