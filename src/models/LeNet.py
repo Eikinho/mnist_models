@@ -1,11 +1,12 @@
 from src.models.Net import Net
+
 import tensorflow as tf
 from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D
 
 
 class LeNet(Net):
     def __init__(self):
-        super().__init__(model=tf.keras.models.Sequential(), name="LeNet")
+        super().__init__(model=tf.keras.models.Sequential(), name="LeNet_Aug")
         self.model.add(
             Conv2D(16, (5, 5), activation="sigmoid", input_shape=(28, 28, 1))
         )

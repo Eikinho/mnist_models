@@ -1,3 +1,8 @@
+# Mac VSCODE
+.DS_Store
+
+digitos_para_teste
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
