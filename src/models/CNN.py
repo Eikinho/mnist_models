@@ -1,7 +1,7 @@
 from src.models.Net import Net
 
 import tensorflow as tf
-from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Dropout
+from tensorflow.keras.layers import Flatten, Dense, Conv2D, MaxPooling2D, Dropout
 
 
 class CNN(Net):

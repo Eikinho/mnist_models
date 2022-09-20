@@ -1,7 +1,7 @@
 from src.models.Net import Net
 
 import tensorflow as tf
-from keras.layers import Flatten, Dense, Dropout
+from tensorflow.keras.layers import Flatten, Dense, Dropout
 
 
 class ANN(Net):
