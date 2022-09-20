@@ -1,7 +1,7 @@
 from src.models.Net import Net
 
 import tensorflow as tf
-from keras.layers import Flatten, Dense, Conv2D, MaxPooling2D
+from keras.layers import Flatten, Dense, Conv2D, AveragePooling2D
 
 
 class LeNet(Net):
@@ -10,9 +10,12 @@ class LeNet(Net):
         self.model.add(
             Conv2D(16, (5, 5), activation="sigmoid", input_shape=(28, 28, 1))
         )
-        self.model.add(MaxPooling2D(2, 2))
-        self.model.add(Conv2D(16, (5, 5), activation=tf.nn.sigmoid))
-        self.model.add(MaxPooling2D(2, 2))
+        self.model.add(
+            Conv2D(16, (5, 5), activation="sigmoid", input_shape=(26, 26, 1))
+        )
+        self.model.add(AveragePooling2D(13, 13))
+        self.model.add(Conv2D(16, (11, 11), activation=tf.nn.sigmoid))
+        self.model.add(AveragePooling2D(5, 5))
         self.model.add(Flatten())
         self.model.add(Dense(120, activation=tf.nn.sigmoid))
         self.model.add(Dense(84, activation=tf.nn.sigmoid))

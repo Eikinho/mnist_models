@@ -12,7 +12,7 @@ def train_models(ann_=False, cnn_=False, cnn_aug_=False, lenet_aug_=False):
 
     if cnn_:
         cnn = CNN()
-        cnn.train(0.2, 128, 25)
+        cnn.train(0.2, 128, 10)
         cnn.plot_history()
 
     if cnn_aug_:

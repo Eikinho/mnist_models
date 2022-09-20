@@ -67,7 +67,6 @@ class Net(Data):
         self.accuracy = np.sum(np.array(self.y_pred) == np.array(self.y_true)) / len(
             self.y_true
         )
-        print(f"{self.name}: {self.accuracy * 100:.2f}%")
 
     def load_model(self):
         self.model = tf.keras.models.load_model(f"src/results/{self.name}.h5")
