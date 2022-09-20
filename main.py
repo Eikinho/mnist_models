@@ -7,12 +7,12 @@ from src.models.LeNet import LeNet
 def train_models(ann_=False, cnn_=False, cnn_aug_=False, lenet_aug_=False):
     if ann_:
         ann = ANN()
-        ann.train(0.2, 8, 5)
+        ann.train(0.2, 13, 3)
         ann.plot_history()
 
     if cnn_:
         cnn = CNN()
-        cnn.train(0.2, 128, 10)
+        cnn.train(0.2, 64, 10)
         cnn.plot_history()
 
     if cnn_aug_:
